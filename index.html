@@ -3,31 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Repoplus — Маркетинговая аналитика</title>
+    <title>Repoplus — Умная маркетинговая аналитика</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; background: #f8f9fa; text-align: center; color: #333; }
-        .container { max-width: 500px; padding: 40px; background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-        h1 { color: #007bff; font-size: 2.5em; margin-bottom: 10px; }
-        p { font-size: 1.1em; line-height: 1.6; color: #666; }
-        .status { display: inline-block; padding: 5px 15px; background: #e7f3ff; color: #007bff; border-radius: 20px; font-size: 0.9em; margin-bottom: 20px; }
-        .contacts { margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; font-size: 0.9em; }
-        .footer { margin-top: 20px; font-size: 0.8em; }
-        .footer a { color: #999; text-decoration: none; }
+        :root { --primary: #007bff; --bg: #f8f9fa; --text: #333; --card: #ffffff; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; margin: 0; background-color: var(--bg); color: var(--text); line-height: 1.6; }
+        
+        .header { background: #fff; padding: 20px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.05); text-align: center; }
+        .logo { font-size: 2em; font-weight: 800; letter-spacing: -1px; color: #1a1a1a; margin: 0; }
+        .logo span { color: var(--primary); }
+        .logo::after { content: '.'; color: var(--primary); }
+
+        .hero { max-width: 800px; margin: 50px auto; text-align: center; padding: 0 20px; animation: fadeIn 0.8s ease-in; }
+        .hero h1 { font-size: 2.5em; color: #2c3e50; margin-bottom: 20px; line-height: 1.2; }
+        .hero p { font-size: 1.2em; color: #6c757d; margin-bottom: 40px; }
+
+        .features { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; max-width: 1000px; margin: 0 auto 50px; padding: 0 20px; }
+        .feature-card { background: var(--card); padding: 30px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); flex: 1; min-width: 250px; text-align: left; border-top: 4px solid var(--primary); }
+        .feature-card h3 { color: #2c3e50; margin-top: 0; }
+        
+        .cta-box { background: #2c3e50; color: white; max-width: 600px; margin: 0 auto 50px; padding: 40px; border-radius: 15px; text-align: center; }
+        .cta-box h2 { margin-top: 0; color: #fff; }
+        .btn { display: inline-block; background: var(--primary); color: white; padding: 12px 30px; text-decoration: none; border-radius: 30px; font-weight: bold; margin-top: 15px; transition: 0.3s; }
+        .btn:hover { background: #0056b3; transform: translateY(-2px); }
+
+        .footer { text-align: center; padding: 30px; color: #aaa; font-size: 0.9em; }
+        .footer a { color: #aaa; text-decoration: none; border-bottom: 1px solid #ddd; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="status">Сайт в разработке</div>
-        <h1>Repoplus</h1>
-        <p>Автоматизация отчетности и сквозная аналитика для вашего бизнеса. Скоро запустим обновленную платформу.</p>
-        <div class="contacts">
-            <strong>Контактная информация:</strong><br>
-            Email: info@repoplus.kz<br>
-            Казахстан, г. Алматы
+
+    <div class="header">
+        <div class="logo">Repo<span>plus</span></div>
+    </div>
+
+    <div class="hero">
+        <h1>Сквозная аналитика, которая работает</h1>
+        <p>Связываем ваши рекламные кабинеты, CRM и отчеты в единую экосистему. Избавьтесь от хаоса в данных и масштабируйте бизнес на основе точных цифр.</p>
+    </div>
+
+    <div class="features">
+        <div class="feature-card">
+            <h3>🤖 Автоматизация отчетов</h3>
+            <p>Сводим данные из Facebook, Google и TikTok Ads в удобные дашборды. Получайте автоматические сводки по лидам и расходам прямо в Telegram.</p>
         </div>
-        <div class="footer">
-            <a href="privacy.html">Политика конфиденциальности</a>
+        <div class="feature-card">
+            <h3>🔗 Умная связка с CRM</h3>
+            <p>Настраиваем точное определение источников трафика. Передаем данные в amoCRM и другие системы без потерь, даже при отсутствии UTM-меток.</p>
+        </div>
+        <div class="feature-card">
+            <h3>📈 Аналитика полного цикла</h3>
+            <p>Отслеживаем путь клиента: от первого клика по рекламе до успешной сделки. Контролируйте реальную стоимость привлечения (CAC) и окупаемость (ROI) каждого канала.</p>
         </div>
     </div>
+
+    <div class="cta-box">
+        <h2>Готовы навести порядок в маркетинге?</h2>
+        <p>Напишите нам, и мы обсудим, как перестать сливать бюджет и увеличить эффективность рекламы.</p>
+        <a href="mailto:info@repoplus.kz" class="btn">Обсудить проект</a>
+    </div>
+
+    <div class="footer">
+        © 2026 Repoplus (ИП Azhara) | Казахстан, г. Алматы | <a href="privacy.html">Политика конфиденциальности</a>
+    </div>
+
 </body>
 </html>
