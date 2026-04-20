@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Repoplus — Умная маркетинговая аналитика</title>
+    <title>Repoplus — Контроль маркетинга и автоматизация отчетности</title>
     <style>
         :root { --primary: #007bff; --bg: #f8f9fa; --text: #333; --card: #ffffff; }
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; margin: 0; background-color: var(--bg); color: var(--text); line-height: 1.6; }
@@ -21,10 +21,17 @@
         .feature-card { background: var(--card); padding: 30px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); flex: 1; min-width: 250px; text-align: left; border-top: 4px solid var(--primary); }
         .feature-card h3 { color: #2c3e50; margin-top: 0; }
         
+        /* Стили для будущей фичи (серая аналитика) */
+        .feature-card.future { background: #ececec; border-top-color: #ccc; opacity: 0.7; box-shadow: none; }
+        .feature-card.future h3 { color: #777; }
+        .badge { background: #999; color: #fff; font-size: 0.7em; padding: 2px 8px; border-radius: 10px; vertical-align: middle; margin-left: 5px; text-transform: uppercase; }
+
         .cta-box { background: #2c3e50; color: white; max-width: 600px; margin: 0 auto 50px; padding: 40px; border-radius: 15px; text-align: center; }
         .cta-box h2 { margin-top: 0; color: #fff; }
-        .btn { display: inline-block; background: var(--primary); color: white; padding: 12px 30px; text-decoration: none; border-radius: 30px; font-weight: bold; margin-top: 15px; transition: 0.3s; }
+        .btn { display: inline-block; background: var(--primary); color: white; padding: 12px 40px; text-decoration: none; border-radius: 30px; font-weight: bold; margin-top: 15px; transition: 0.3s; }
         .btn:hover { background: #0056b3; transform: translateY(-2px); }
+        
+        .copy-email { display: block; margin-top: 15px; font-size: 0.9em; color: #b0b8c1; cursor: text; }
 
         .footer { text-align: center; padding: 30px; color: #aaa; font-size: 0.9em; }
         .footer a { color: #aaa; text-decoration: none; border-bottom: 1px solid #ddd; }
@@ -39,29 +46,30 @@
     </div>
 
     <div class="hero">
-        <h1>Сквозная аналитика, которая работает</h1>
-        <p>Связываем ваши рекламные кабинеты, CRM и отчеты в единую экосистему. Избавьтесь от хаоса в данных и масштабируйте бизнес на основе точных цифр.</p>
+        <h1>Прозрачный маркетинг без рутины</h1>
+        <p>Автоматизируем сбор отчетности и берем под контроль ваши рекламные бюджеты. Больше никаких ошибок в биллингах и потерянных часов на сведение таблиц.</p>
     </div>
 
     <div class="features">
         <div class="feature-card">
-            <h3>🤖 Автоматизация отчетов</h3>
-            <p>Сводим данные из Facebook, Google и TikTok Ads в удобные дашборды. Получайте автоматические сводки по лидам и расходам прямо в Telegram.</p>
+            <h3>📊 Автоматизация отчетов</h3>
+            <p>Забудьте о ручном копировании данных. Мы настраиваем автоматический импорт показателей из TikTok, Facebook и Google прямо в ваши отчетные дашборды.</p>
         </div>
         <div class="feature-card">
-            <h3>🔗 Умная связка с CRM</h3>
-            <p>Настраиваем точное определение источников трафика. Передаем данные в amoCRM и другие системы без потерь, даже при отсутствии UTM-меток.</p>
+            <h3>💰 Контроль биллинга</h3>
+            <p>Мониторинг расходов и остатков на балансах в режиме реального времени. Уведомления о критических изменениях бюджета приходят прямо в ваш Telegram.</p>
         </div>
-        <div class="feature-card">
-            <h3>📈 Аналитика полного цикла</h3>
-            <p>Отслеживаем путь клиента: от первого клика по рекламе до успешной сделки. Контролируйте реальную стоимость привлечения (CAC) и окупаемость (ROI) каждого канала.</p>
+        <div class="feature-card future">
+            <h3>📈 Сквозная аналитика <span class="badge">Soon</span></h3>
+            <p>Глубокое отслеживание пути клиента от первого клика до оплаты в кассе. Инструмент находится в стадии закрытого тестирования для первых клиентов.</p>
         </div>
     </div>
 
     <div class="cta-box">
-        <h2>Готовы навести порядок в маркетинге?</h2>
-        <p>Напишите нам, и мы обсудим, как перестать сливать бюджет и увеличить эффективность рекламы.</p>
+        <h2>Начните контролировать бюджет сегодня</h2>
+        <p>Напишите нам для обсуждения внедрения автоматизации в ваш проект.</p>
         <a href="mailto:info@repoplus.kz" class="btn">Обсудить проект</a>
+        <span class="copy-email">или напишите напрямую: info@repoplus.kz</span>
     </div>
 
     <div class="footer">
