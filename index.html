@@ -3,77 +3,150 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Repoplus — Контроль маркетинга и автоматизация отчетности</title>
+    <title>Приглашение на свадьбу — Алимжан и Дана</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #007bff; --bg: #f8f9fa; --text: #333; --card: #ffffff; }
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; margin: 0; background-color: var(--bg); color: var(--text); line-height: 1.6; }
+        :root { --bg: #FDFBF7; --text: #2C3531; --accent: #D4AF37; }
+        body { font-family: 'Montserrat', sans-serif; background: var(--bg); color: var(--text); margin: 0; text-align: center; padding-bottom: 50px; }
+        h1, h2, .names { font-family: 'Playfair Display', serif; }
+        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; background: linear-gradient(rgba(253,251,247,0.4), var(--bg)), url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1500&q=80') center/cover; }
+        .names { font-size: 3.5em; margin: 10px 0; }
+        .date-main { font-size: 1.5em; letter-spacing: 3px; border-top: 1px solid var(--accent); border-bottom: 1px solid var(--accent); display: inline-block; padding: 10px 20px; margin-top: 20px; }
+        .section { padding: 80px 20px; max-width: 600px; margin: 0 auto; }
+        .divider { width: 60px; height: 1px; background: var(--accent); margin: 20px auto; }
+        .time-item { margin-bottom: 25px; }
+        .time { font-size: 1.3em; color: var(--accent); font-weight: 500; }
+        .btn { display: inline-block; background: var(--text); color: white; padding: 15px 35px; text-decoration: none; border-radius: 30px; margin-top: 20px; transition: 0.3s; border: none; font-size: 1em; cursor: pointer; }
+        .btn:hover { background: var(--accent); }
+        form { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        input, select, textarea { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; font-family: inherit; box-sizing: border-box; }
+        #status { margin-top: 15px; font-weight: 500; }
         
-        .header { background: #fff; padding: 20px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.05); text-align: center; }
-        .logo { font-size: 2em; font-weight: 800; letter-spacing: -1px; color: #1a1a1a; margin: 0; }
-        .logo span { color: var(--primary); }
-        .logo::after { content: '.'; color: var(--primary); }
-
-        .hero { max-width: 800px; margin: 50px auto; text-align: center; padding: 0 20px; animation: fadeIn 0.8s ease-in; }
-        .hero h1 { font-size: 2.5em; color: #2c3e50; margin-bottom: 20px; line-height: 1.2; }
-        .hero p { font-size: 1.2em; color: #6c757d; margin-bottom: 40px; }
-
-        .features { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; max-width: 1000px; margin: 0 auto 50px; padding: 0 20px; }
-        .feature-card { background: var(--card); padding: 30px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); flex: 1; min-width: 250px; text-align: left; border-top: 4px solid var(--primary); }
-        .feature-card h3 { color: #2c3e50; margin-top: 0; }
-        
-        /* Стили для будущей фичи (серая аналитика) */
-        .feature-card.future { background: #ececec; border-top-color: #ccc; opacity: 0.7; box-shadow: none; }
-        .feature-card.future h3 { color: #777; }
-        .badge { background: #999; color: #fff; font-size: 0.7em; padding: 2px 8px; border-radius: 10px; vertical-align: middle; margin-left: 5px; text-transform: uppercase; }
-
-        .cta-box { background: #2c3e50; color: white; max-width: 600px; margin: 0 auto 50px; padding: 40px; border-radius: 15px; text-align: center; }
-        .cta-box h2 { margin-top: 0; color: #fff; }
-        .btn { display: inline-block; background: var(--primary); color: white; padding: 12px 40px; text-decoration: none; border-radius: 30px; font-weight: bold; margin-top: 15px; transition: 0.3s; }
-        .btn:hover { background: #0056b3; transform: translateY(-2px); }
-        
-        .copy-email { display: block; margin-top: 15px; font-size: 0.9em; color: #b0b8c1; cursor: text; }
-
-        .footer { text-align: center; padding: 30px; color: #aaa; font-size: 0.9em; }
-        .footer a { color: #aaa; text-decoration: none; border-bottom: 1px solid #ddd; }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        /* Стили для кнопки музыки */
+        .music-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--text);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            z-index: 1000;
+            font-family: inherit;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: 0.3s;
+            font-size: 0.9em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .music-btn:hover { background: var(--accent); transform: scale(1.05); }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <div class="logo">Repo<span>plus</span></div>
-    </div>
+    <audio id="bg-music" loop>
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
+
+    <button id="music-btn" class="music-btn">🎵 Включить музыку</button>
 
     <div class="hero">
-        <h1>Прозрачный маркетинг без рутины</h1>
-        <p>Автоматизируем сбор отчетности и берем под контроль ваши рекламные бюджеты. Больше никаких ошибок в биллингах и потерянных часов на сведение таблиц.</p>
+        <div class="names">Алимжан<br>&<br>Дана</div>
+        <div class="date-main">13.06.2026</div>
     </div>
 
-    <div class="features">
-        <div class="feature-card">
-            <h3>📊 Автоматизация отчетов</h3>
-            <p>Забудьте о ручном копировании данных. Мы настраиваем автоматический импорт показателей из TikTok, Facebook и Google прямо в ваши отчетные дашборды.</p>
+    <div class="section">
+        <h2>Дорогие гости!</h2>
+        <div class="divider"></div>
+        <p>Мы будем счастливы видеть вас на нашем торжестве!</p>
+    </div>
+
+    <div class="section">
+        <h2>Программа</h2>
+        <div class="divider"></div>
+        <div class="time-item">
+            <div class="time">17:00</div>
+            <div>Беташар</div>
         </div>
-        <div class="feature-card">
-            <h3>💰 Контроль биллинга</h3>
-            <p>Мониторинг расходов и остатков на балансах в режиме реального времени. Уведомления о критических изменениях бюджета приходят прямо в ваш Telegram.</p>
-        </div>
-        <div class="feature-card future">
-            <h3>📈 Сквозная аналитика <span class="badge">Soon</span></h3>
-            <p>Глубокое отслеживание пути клиента от первого клика до оплаты в кассе. Инструмент находится в стадии закрытого тестирования для первых клиентов.</p>
+        <div class="time-item">
+            <div class="time">18:00</div>
+            <div>Той</div>
         </div>
     </div>
 
-    <div class="cta-box">
-        <h2>Начните контролировать бюджет сегодня</h2>
-        <p>Напишите нам для обсуждения внедрения автоматизации в ваш проект.</p>
-        <a href="mailto:info@repoplus.kz" class="btn">Обсудить проект</a>
-        <span class="copy-email">или напишите напрямую: info@repoplus.kz</span>
+    <div class="section">
+        <h2>Место проведения</h2>
+        <div class="divider"></div>
+        <p><b>Банкетный зал Атамекен</b></p>
+        <p>г. Алматы, м-н Теректи, ул. Орталык, 36а</p>
+        <a href="https://2gis.kz/almaty/search/%D0%B1%D0%B0%D0%BD%D0%BA%D0%B5%D1%82%D0%BD%D1%8B%D0%B9%20%D0%B7%D0%B0%D0%BB/firm/70000001023175064?m=76.789535%2C43.245202%2F18" target="_blank" class="btn">Открыть в 2GIS</a>
     </div>
 
-    <div class="footer">
-        © 2026 Repoplus (ИП Azhara) | Казахстан, г. Алматы | <a href="privacy.html">Политика конфиденциальности</a>
+    <div class="section">
+        <h2>Подтверждение</h2>
+        <div class="divider"></div>
+        <p>Пожалуйста, подтвердите ваше участие до 1 июня:</p>
+        
+        <form id="rsvp-form">
+            <input type="text" name="name" placeholder="Ваше Имя и Фамилия" required>
+            <select name="attendance" required>
+                <option value="" disabled selected>Сможете прийти?</option>
+                <option value="Приду">Я приду</option>
+                <option value="Не приду">Не смогу прийти</option>
+            </select>
+            <textarea name="message" placeholder="Ваши пожелания или количество гостей"></textarea>
+            <button type="submit" class="btn" id="submit-btn">Отправить ответ</button>
+            <div id="status"></div>
+        </form>
+    </div>
+
+    <script>
+        // Скрипт для отправки формы
+        const form = document.getElementById('rsvp-form');
+        const status = document.getElementById('status');
+        const btn = document.getElementById('submit-btn');
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            btn.disabled = true;
+            status.innerText = "Отправка...";
+            
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbwLFYYzUVw92MsAYoL7CDb4jMarnlpfgdl3_wo30Bn0oahAEjJovdMACqiBYZM0BBmZ/exec'; 
+
+            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                .then(response => {
+                    status.innerText = "Спасибо! Ваш ответ записан.";
+                    form.reset();
+                    btn.style.display = "none";
+                })
+                .catch(error => {
+                    status.innerText = "Ошибка. Попробуйте еще раз или напишите жениху.";
+                    btn.disabled = false;
+                });
+        });
+
+        // Скрипт для музыки
+        const music = document.getElementById('bg-music');
+        const musicBtn = document.getElementById('music-btn');
+        let isPlaying = false;
+
+        musicBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                music.pause();
+                musicBtn.innerHTML = '🎵 Включить музыку';
+            } else {
+                music.play();
+                musicBtn.innerHTML = '⏸ Выключить музыку';
+            }
+            isPlaying = !isPlaying;
+        });
+    </script>
+
+    <div style="padding: 40px; color: #aaa; font-size: 0.8em;">
+        © 2026 Алимжан & Дана
     </div>
 
 </body>
