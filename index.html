@@ -6,300 +6,286 @@
     <title>Приглашение на свадьбу — Алимжан & Дана</title>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
-        :root { --bg: #FDFBF7; --text: #2C3531; --accent: #C5A880; }
-        body { font-family: 'Montserrat', sans-serif; background: var(--bg); color: var(--text); margin: 0; text-align: center; overflow-x: hidden; }
+        :root { 
+            --bg: #FDFBF7; 
+            --deep-green: #1B3022; 
+            --gold: #D4AF37; 
+            --white: #ffffff;
+        }
+        
+        body { font-family: 'Montserrat', sans-serif; background: var(--bg); color: var(--deep-green); margin: 0; text-align: center; overflow-x: hidden; }
         
         /* Логика языков */
         body.lang-ru .kz { display: none !important; }
         body.lang-kz .ru { display: none !important; }
 
-        h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 600; color: var(--text); }
-        .names { font-family: 'Great Vibes', cursive; font-size: 4.5em; margin: 15px 0; color: var(--accent); line-height: 1; }
+        h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 600; }
+        .names { 
+            font-family: 'Great Vibes', cursive; 
+            font-size: clamp(3.5em, 12vw, 5em); 
+            margin: 15px 0; 
+            color: var(--gold); 
+            line-height: 1.1;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1); /* Чтобы золото на светлом фоне не терялось */
+        }
         
-        /* Экран приветствия (для обхода блокировки музыки) */
-        #welcome-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg); z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 1s ease, visibility 1s ease; }
-        #welcome-screen.hidden { opacity: 0; visibility: hidden; }
-        .open-btn { background: var(--accent); color: white; border: none; padding: 15px 40px; font-family: 'Cormorant Garamond', serif; font-size: 1.5em; border-radius: 30px; cursor: pointer; margin-top: 30px; transition: 0.3s; letter-spacing: 2px; }
-        .open-btn:hover { transform: scale(1.05); background: #b09570; }
-
-        /* Переключатель языков */
-        .lang-switcher { position: fixed; top: 20px; right: 20px; z-index: 1000; display: flex; gap: 10px; background: rgba(253,251,247,0.8); padding: 5px 10px; border-radius: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-        .lang-btn { background: none; border: none; font-family: 'Montserrat', sans-serif; font-size: 0.9em; cursor: pointer; color: #888; font-weight: 500; transition: 0.3s; padding: 5px 10px; border-radius: 15px; }
-        .lang-btn.active { color: white; background: var(--accent); }
+        /* Начальный экран с выбором языка */
+        #welcome-screen { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: var(--deep-green); z-index: 9999; 
+            display: flex; flex-direction: column; justify-content: center; align-items: center; 
+            color: var(--white);
+        }
+        #welcome-screen.hidden { opacity: 0; visibility: hidden; transition: 1s ease; }
+        
+        .welcome-names { font-family: 'Great Vibes', cursive; font-size: 3.5em; color: var(--gold); margin-bottom: 30px; }
+        
+        .entry-btns { display: flex; flex-direction: column; gap: 15px; width: 80%; max-width: 300px; }
+        .open-btn { 
+            background: transparent; color: var(--gold); border: 1px solid var(--gold); 
+            padding: 15px; font-family: 'Cormorant Garamond', serif; font-size: 1.3em; 
+            border-radius: 5px; cursor: pointer; transition: 0.3s; letter-spacing: 1px;
+        }
+        .open-btn:hover { background: var(--gold); color: var(--deep-green); }
 
         /* Кнопка музыки */
-        .music-btn { position: fixed; bottom: 20px; right: 20px; z-index: 1000; background: rgba(253,251,247,0.9); border: 1px solid var(--accent); border-radius: 50%; width: 50px; height: 50px; cursor: pointer; font-size: 1.2em; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .music-btn { position: fixed; bottom: 20px; right: 20px; z-index: 1000; background: var(--white); border: 1px solid var(--gold); border-radius: 50%; width: 45px; height: 45px; cursor: pointer; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
 
-        .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 20px; background: linear-gradient(to bottom, rgba(253,251,247,0.3), var(--bg)), url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80') center/cover; }
+        .hero { 
+            min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 20px; 
+            background: linear-gradient(rgba(27, 48, 34, 0.7), rgba(27, 48, 34, 0.7)), url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1000&q=80') center/cover;
+            color: var(--white);
+        }
+        .hero .names { color: var(--gold); text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
         
-        .section { padding: 60px 20px; max-width: 700px; margin: 0 auto; }
-        .text-romantic { font-family: 'Cormorant Garamond', serif; font-size: 1.6em; line-height: 1.5; margin-bottom: 20px; }
-        .divider { width: 50px; height: 1px; background: var(--accent); margin: 30px auto; }
+        .section { padding: 60px 20px; max-width: 600px; margin: 0 auto; }
+        .text-romantic { font-family: 'Cormorant Garamond', serif; font-size: 1.5em; line-height: 1.4; }
+        .divider { width: 80px; height: 1px; background: var(--gold); margin: 25px auto; }
 
         /* Календарь */
-        .calendar { max-width: 300px; margin: 40px auto; background: white; padding: 20px; border-radius: 15px; box-shadow: 0 5px 25px rgba(0,0,0,0.05); }
-        .cal-month { font-family: 'Cormorant Garamond', serif; font-size: 1.5em; color: var(--accent); margin-bottom: 15px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px;}
-        .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; font-size: 0.9em; }
-        .cal-day { color: #888; font-weight: 500; margin-bottom: 10px; }
-        .cal-date { padding: 5px; border-radius: 50%; }
-        .cal-heart { background: var(--accent); color: white; position: relative; font-weight: bold; }
-        .cal-heart::after { content: '❤'; position: absolute; top: -10px; right: -5px; color: #e74c3c; font-size: 0.8em; }
+        .calendar { max-width: 300px; margin: 30px auto; background: white; padding: 20px; border-radius: 10px; border: 1px solid var(--gold); }
+        .cal-month { font-family: 'Cormorant Garamond', serif; font-size: 1.4em; color: var(--deep-green); margin-bottom: 15px; text-transform: uppercase; }
+        .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; font-size: 0.85em; }
+        .cal-heart { background: var(--gold); color: white; border-radius: 50%; position: relative; font-weight: bold; }
+        .cal-heart::after { content: '❤'; position: absolute; top: -8px; right: -4px; color: #ff4d4d; font-size: 10px; }
 
         /* Программа */
-        .program-item { margin-bottom: 30px; }
-        .program-time { font-family: 'Cormorant Garamond', serif; font-size: 1.8em; color: var(--accent); font-weight: 600; margin-bottom: 5px; }
+        .program-item { margin-bottom: 25px; display: flex; align-items: center; justify-content: center; gap: 20px; }
+        .program-time { font-family: 'Cormorant Garamond', serif; font-size: 1.6em; color: var(--gold); font-weight: 600; min-width: 70px; }
+        .program-desc { text-align: left; font-size: 0.95em; }
 
         /* Таймер */
-        .timer-wrap { display: flex; justify-content: center; gap: 15px; margin-top: 30px; }
-        .timer-box { background: white; padding: 15px; border-radius: 10px; min-width: 60px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        .timer-num { font-family: 'Cormorant Garamond', serif; font-size: 2em; color: var(--accent); font-weight: 600; }
-        .timer-label { font-size: 0.7em; text-transform: uppercase; letter-spacing: 1px; color: #888; margin-top: 5px; }
+        .timer-wrap { display: flex; justify-content: center; gap: 10px; margin-top: 25px; }
+        .timer-box { background: var(--deep-green); color: var(--gold); padding: 10px; border-radius: 5px; min-width: 65px; }
+        .timer-num { font-size: 1.5em; font-weight: 600; }
+        .timer-label { font-size: 0.6em; text-transform: uppercase; color: var(--white); }
 
-        /* Форма и Кнопки */
-        .btn { display: inline-block; background: var(--text); color: white; padding: 15px 35px; text-decoration: none; border-radius: 30px; font-family: 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: 1px; font-size: 0.8em; margin-top: 20px; transition: 0.3s; border: none; cursor: pointer; }
-        .btn:hover { background: var(--accent); }
+        /* Новая форма с кнопками-статусами */
+        .form-container { background: white; padding: 30px 20px; border-radius: 15px; border: 1px solid var(--gold); }
+        input[type="text"] { width: 100%; padding: 15px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; font-size: 1em; text-align: center; }
         
-        .radio-group { text-align: left; display: flex; flex-direction: column; gap: 15px; margin: 20px 0; }
-        .radio-label { display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 0.95em; }
-        input[type="text"], textarea { width: 100%; padding: 15px; margin: 10px 0; border: 1px solid #e0e0e0; border-radius: 10px; font-family: inherit; box-sizing: border-box; background: #fafafa; }
+        .status-options { display: flex; flex-direction: column; gap: 10px; }
+        .status-btn { 
+            background: white; border: 1px solid var(--deep-green); color: var(--deep-green); 
+            padding: 12px; border-radius: 5px; cursor: pointer; transition: 0.3s; font-family: inherit;
+        }
+        .status-btn.active { background: var(--deep-green); color: var(--white); }
+
+        .submit-btn { 
+            background: var(--gold); color: white; width: 100%; padding: 15px; 
+            border: none; border-radius: 5px; margin-top: 20px; font-weight: 600; 
+            cursor: pointer; text-transform: uppercase; letter-spacing: 1px;
+        }
         
-        form { background: white; padding: 40px 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .btn-2gis { background: #2D5A27; color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px; display: inline-block; margin-top: 15px; font-size: 0.9em; }
     </style>
 </head>
 <body class="lang-ru">
 
-    <audio id="bg-music" loop>
-        <source src="music.mp3" type="audio/mpeg">
-    </audio>
+    <audio id="bg-music" loop><source src="music.mp3" type="audio/mpeg"></audio>
 
     <div id="welcome-screen">
-        <div class="names">Алимжан & Дана</div>
-        <p class="text-romantic ru">Приглашаем на нашу свадьбу</p>
-        <p class="text-romantic kz">Үйлену тойымызға шақырамыз</p>
-        <button class="open-btn" onclick="openInvitation()">
-            <span class="ru">Открыть приглашение</span>
-            <span class="kz">Шақыруды ашу</span>
-        </button>
-    </div>
-
-    <div class="lang-switcher">
-        <button class="lang-btn active" onclick="setLang('ru')">RU</button>
-        <button class="lang-btn" onclick="setLang('kz')">KZ</button>
+        <div class="welcome-names">Алимжан & Дана</div>
+        <div class="entry-btns">
+            <button class="open-btn" onclick="openInvitation('ru')">Открыть приглашение</button>
+            <button class="open-btn" onclick="openInvitation('kz')">Шақыруды ашу</button>
+        </div>
     </div>
 
     <button id="music-btn" class="music-btn" onclick="toggleMusic()">🔊</button>
 
     <div class="hero">
-        <div class="text-romantic ru" style="text-transform: uppercase; letter-spacing: 3px; font-size: 1em;">Приглашение на свадьбу</div>
-        <div class="text-romantic kz" style="text-transform: uppercase; letter-spacing: 3px; font-size: 1em;">Үйлену тойға шақыру</div>
-        
-        <div class="names" style="margin: 30px 0;">Алимжан<br>&<br>Дана</div>
+        <p class="ru">ПРИГЛАШЕНИЕ НА СВАДЬБУ</p>
+        <p class="kz">ҮЙЛЕНУ ТОЙҒА ШАҚЫРУ</p>
+        <div class="names">Алимжан<br>&<br>Дана</div>
+        <div class="ru">13 июня 2026</div>
+        <div class="kz">13 маусым 2026</div>
     </div>
 
     <div class="section">
         <div class="ru">
             <div class="text-romantic">Дорогие близкие, родные и друзья!</div>
             <p>С радостью приглашаем Вас разделить с нами этот незабываемый день — день рождения нашей семьи!</p>
-            <p>Ваше присутствие сделает этот праздник особенным, ведь именно с вами мы хотим разделить эти счастливые мгновения.</p>
+            <p>Ваше присутствие сделает этот праздник полным, ведь именно с вами мы хотим разделить этот радостный момент.</p>
         </div>
         <div class="kz">
             <div class="text-romantic">Құрметті ағайын-туыс, бауырлар және достар!</div>
-            <p>Сіздерді өміріміздегі ең ұмытылмас күн – отбасымыздың шаңырақ көтеру тойына ортақтасуға шақырамыз!</p>
-            <p>Бұл қуанышты сәтті өзіңізбен бөлісу біз үшін үлкен бақыт, сіздің келуіңіз мерекеміздің ажарын аша түседі.</p>
+            <p>Сіздерді өміріміздегі ең ұмытылмас күн – шаңырақ көтеру тойымызға ортақтасуға шақырамыз!</p>
+            <p>Бұл қуанышты сәтті сіздермен бөлісу біз үшін үлкен бақыт. Келуіңіз мерекеміздің ажарын аша түседі.</p>
         </div>
         
-        <div class="divider"></div>
-
         <div class="calendar">
             <div class="cal-month ru">Июнь 2026</div>
             <div class="cal-month kz">Маусым 2026</div>
             <div class="cal-grid">
-                <div class="cal-day ru">Пн</div><div class="cal-day ru">Вт</div><div class="cal-day ru">Ср</div><div class="cal-day ru">Чт</div><div class="cal-day ru">Пт</div><div class="cal-day ru">Сб</div><div class="cal-day ru">Вс</div>
-                <div class="cal-day kz">Дс</div><div class="cal-day kz">Сс</div><div class="cal-day kz">Ср</div><div class="cal-day kz">Бс</div><div class="cal-day kz">Жм</div><div class="cal-day kz">Сн</div><div class="cal-day kz">Жк</div>
-                
-                <div class="cal-date">1</div><div class="cal-date">2</div><div class="cal-date">3</div><div class="cal-date">4</div><div class="cal-date">5</div><div class="cal-date">6</div><div class="cal-date">7</div>
-                <div class="cal-date">8</div><div class="cal-date">9</div><div class="cal-date">10</div><div class="cal-date">11</div><div class="cal-date">12</div><div class="cal-date cal-heart">13</div><div class="cal-date">14</div>
-                <div class="cal-date">15</div><div class="cal-date">16</div><div class="cal-date">17</div><div class="cal-date">18</div><div class="cal-date">19</div><div class="cal-date">20</div><div class="cal-date">21</div>
-                <div class="cal-date">22</div><div class="cal-date">23</div><div class="cal-date">24</div><div class="cal-date">25</div><div class="cal-date">26</div><div class="cal-date">27</div><div class="cal-date">28</div>
-                <div class="cal-date">29</div><div class="cal-date">30</div><div class="cal-date"></div><div class="cal-date"></div><div class="cal-date"></div><div class="cal-date"></div><div class="cal-date"></div>
+                <div>Пн</div><div>Вт</div><div>Ср</div><div>Чт</div><div>Пт</div><div>Сб</div><div>Вс</div>
+                <div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div><div>7</div>
+                <div>8</div><div>9</div><div>10</div><div>11</div><div>12</div><div class="cal-heart">13</div><div>14</div>
+                <div>15</div><div>16</div><div>17</div><div>18</div><div>19</div><div>20</div><div>21</div>
+                <div>22</div><div>23</div><div>24</div><div>25</div><div>26</div><div>27</div><div>28</div>
+                <div>29</div><div>30</div>
             </div>
         </div>
     </div>
 
-    <div class="section" style="background: white; padding: 60px 20px;">
-        <h2 class="ru text-romantic" style="font-size: 2.2em;">Программа торжества</h2>
-        <h2 class="kz text-romantic" style="font-size: 2.2em;">Той бағдарламасы</h2>
+    <div class="section" style="background: #fff; border-top: 1px solid #eee; border-bottom: 1px solid #eee;">
+        <h2 class="ru">Программа торжества</h2>
+        <h2 class="kz">Той бағдарламасы</h2>
         <div class="divider"></div>
         
         <div class="program-item">
             <div class="program-time">17:00</div>
-            <div class="ru">Сбор гостей</div>
-            <div class="kz">Қонақтарды күтіп алу</div>
+            <div class="program-desc">
+                <b class="ru">Сбор гостей</b><b class="kz">Қонақтардың жиналуы</b>
+            </div>
         </div>
         <div class="program-item">
             <div class="program-time">17:30</div>
-            <div class="ru">Обряд Беташар</div>
-            <div class="kz">Беташар дәстүрі</div>
+            <div class="program-desc">
+                <b class="ru">Обряд Беташар</b><b class="kz">Беташар рәсімі</b>
+            </div>
         </div>
         <div class="program-item">
             <div class="program-time">18:00</div>
-            <div class="ru">Начало торжества</div>
-            <div class="kz">Тойдың басталуы</div>
+            <div class="program-desc">
+                <b class="ru">Начало торжества</b><b class="kz">Тойдың басталуы</b>
+            </div>
         </div>
     </div>
 
     <div class="section">
-        <h2 class="ru text-romantic" style="font-size: 2.2em;">Место проведения</h2>
-        <h2 class="kz text-romantic" style="font-size: 2.2em;">Өтетін орны</h2>
+        <h2 class="ru">Место проведения</h2>
+        <h2 class="kz">Өтетін орны</h2>
         <div class="divider"></div>
-        
-        <p style="font-size: 1.2em; font-weight: 500;">Банкетный зал «Атамекен»</p>
+        <p><b>Банкетный зал «Атамекен»</b></p>
         <p class="ru">г. Алматы, м-н Теректи, ул. Орталык, 36а</p>
         <p class="kz">Алматы қ., Теректі ы/а, Орталық көш., 36а</p>
         
-        <p class="ru" style="font-size: 0.9em; color: #666; margin-top: 20px;">Для вашего удобства мы подготовили карту, надеемся что вы легко найдете место проведения свадьбы и порадуете нас своим присутствием!</p>
-        <p class="kz" style="font-size: 0.9em; color: #666; margin-top: 20px;">Той өтетін орынды оңай табуыңыз үшін картаны ұсынамыз. Қуанышымызбен бөлісуге келеді деп үміттенеміз!</p>
+        <p style="font-size: 0.85em; font-style: italic; color: #666; margin: 20px 0;">
+            <span class="ru">Для вашего удобства мы подготовили карту, надеемся что вы легко найдете место проведения свадьбы!</span>
+            <span class="kz">Той өтетін орынды оңай табуыңыз үшін картаны дайындадық!</span>
+        </p>
         
-        <a href="https://2gis.kz/almaty/search/%D0%B1%D0%B0%D0%BD%D0%BA%D0%B5%D1%82%D0%BD%D1%8B%D0%B9%20%D0%B7%D0%B0%D0%BB/firm/70000001023175064?m=76.789535%2C43.245202%2F18" target="_blank" class="btn">
-            <span class="ru">Открыть в 2GIS</span>
-            <span class="kz">2GIS арқылы ашу</span>
-        </a>
+        <a href="https://2gis.kz/almaty/search/%D0%B1%D0%B0%D0%BD%D0%BA%D0%B5%D1%82%D0%BD%D1%8B%D0%B9%20%D0%B7%D0%B0%D0%BB/firm/70000001023175064?m=76.789535%2C43.245202%2F18" target="_blank" class="btn-2gis">2ГИС КАРТА</a>
     </div>
 
-    <div class="section" style="background: white;">
-        <h2 class="ru text-romantic" style="font-size: 2em;">До торжества осталось</h2>
-        <h2 class="kz text-romantic" style="font-size: 2em;">Тойға дейін қалды</h2>
+    <div class="section" style="background: var(--deep-green); color: var(--gold);">
+        <h2 class="ru" style="color: var(--white);">До торжества осталось</h2>
+        <h2 class="kz" style="color: var(--white);">Тойға дейін қалды</h2>
         <div class="timer-wrap">
-            <div class="timer-box"><div class="timer-num" id="days">00</div><div class="timer-label ru">Дней</div><div class="timer-label kz">Күн</div></div>
-            <div class="timer-box"><div class="timer-num" id="hours">00</div><div class="timer-label ru">Часов</div><div class="timer-label kz">Сағат</div></div>
-            <div class="timer-box"><div class="timer-num" id="minutes">00</div><div class="timer-label ru">Минут</div><div class="timer-label kz">Минут</div></div>
+            <div class="timer-box"><div class="timer-num" id="days">00</div><div class="timer-label ru">дней</div><div class="timer-label kz">күн</div></div>
+            <div class="timer-box"><div class="timer-num" id="hours">00</div><div class="timer-label ru">часов</div><div class="timer-label kz">сағат</div></div>
+            <div class="timer-box"><div class="timer-num" id="minutes">00</div><div class="timer-label ru">минут</div><div class="timer-label kz">минут</div></div>
         </div>
     </div>
 
     <div class="section">
-        <h2 class="ru text-romantic" style="font-size: 2em;">Ждем вас с нетерпением!</h2>
-        <h2 class="kz text-romantic" style="font-size: 2em;">Сіздерді асыға күтеміз!</h2>
-        <p class="ru" style="margin-bottom: 30px;">Просим подтвердить ваше присутствие</p>
-        <p class="kz" style="margin-bottom: 30px;">Тойға келетініңізді растауыңызды сұраймыз</p>
+        <h2 class="ru">Подтвердите ваше присутствие</h2>
+        <h2 class="kz">Тойға келетініңізді растаңыз</h2>
+        <div class="divider"></div>
         
-        <form id="rsvp-form">
-            <input type="text" name="name" id="name-input" placeholder="Ваше Имя и Фамилия" required>
+        <form id="rsvp-form" class="form-container">
+            <input type="text" name="name" id="name-input" placeholder="Ваше Имя / Атыңыз" required>
             
-            <div class="radio-group">
-                <label class="radio-label">
-                    <input type="radio" name="attendance" value="Да, приду" required> 
-                    <span class="ru">Да, с радостью приду</span>
-                    <span class="kz">Иә, қуана келемін</span>
-                </label>
-                <label class="radio-label">
-                    <input type="radio" name="attendance" value="Приду с супругой/парой"> 
-                    <span class="ru">Приду с супругой / парой</span>
-                    <span class="kz">Жұбайыммен / серігіммен келемін</span>
-                </label>
-                <label class="radio-label">
-                    <input type="radio" name="attendance" value="Не смогу прийти"> 
-                    <span class="ru">К сожалению, не смогу прийти</span>
-                    <span class="kz">Өкінішке орай, келе алмаймын</span>
-                </label>
+            <div class="status-options">
+                <button type="button" class="status-btn" onclick="setStatus('Да, приду', this)">
+                    <span class="ru">Да, приду</span><span class="kz">Иә, келемін</span>
+                </button>
+                <button type="button" class="status-btn" onclick="setStatus('Приду с супругой', this)">
+                    <span class="ru">Приду с супругой</span><span class="kz">Жұбайыммен келемін</span>
+                </button>
+                <button type="button" class="status-btn" onclick="setStatus('Не смогу прийти', this)">
+                    <span class="ru">Не смогу прийти</span><span class="kz">Келе алмаймын</span>
+                </button>
             </div>
-
-            <textarea name="message" id="message-input" placeholder="Пожелания для молодых" rows="3"></textarea>
             
-            <button type="submit" class="btn" id="submit-btn" style="width: 100%;">
-                <span class="ru">Отправить ответ</span>
-                <span class="kz">Жауапты жіберу</span>
+            <input type="hidden" name="attendance" id="attendance-input" required>
+            
+            <button type="submit" class="submit-btn" id="submit-btn">
+                <span class="ru">Отправить</span><span class="kz">Жіберу</span>
             </button>
-            <div id="status" style="margin-top: 15px; font-weight: 500;"></div>
+            <div id="status-msg" style="margin-top: 15px;"></div>
         </form>
+        
+        <h3 class="ru" style="margin-top: 40px; font-family: 'Great Vibes'; font-size: 2.5em;">Ждем вас!</h3>
+        <h3 class="kz" style="margin-top: 40px; font-family: 'Great Vibes'; font-size: 2.5em;">Сіздерді күтеміз!</h3>
     </div>
 
     <script>
-        // --- Музыка и экран приветствия ---
         const music = document.getElementById('bg-music');
-        const musicBtn = document.getElementById('music-btn');
+        const attendanceInput = document.getElementById('attendance-input');
         let isPlaying = false;
 
-        function openInvitation() {
+        function openInvitation(lang) {
+            document.body.className = `lang-${lang}`;
             document.getElementById('welcome-screen').classList.add('hidden');
-            document.body.style.overflow = 'auto'; // Разрешаем прокрутку
-            music.play().then(() => {
-                isPlaying = true;
-                musicBtn.innerHTML = '🔊';
-            }).catch(() => {
-                // Если браузер все равно заблокировал
-                musicBtn.innerHTML = '🔈';
-            });
+            music.play().then(() => isPlaying = true);
+        }
+
+        function setStatus(val, btn) {
+            attendanceInput.value = val;
+            document.querySelectorAll('.status-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
         }
 
         function toggleMusic() {
-            if (isPlaying) {
-                music.pause();
-                musicBtn.innerHTML = '🔈';
-            } else {
-                music.play();
-                musicBtn.innerHTML = '🔊';
-            }
+            if (isPlaying) { music.pause(); document.getElementById('music-btn').innerHTML = '🔈'; }
+            else { music.play(); document.getElementById('music-btn').innerHTML = '🔊'; }
             isPlaying = !isPlaying;
         }
 
-        // Запрещаем прокрутку, пока не нажмут "Открыть"
-        document.body.style.overflow = 'hidden';
-
-        // --- Переключение языков ---
-        function setLang(lang) {
-            document.body.className = `lang-${lang}`;
-            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            
-            // Меняем плейсхолдеры в форме
-            if(lang === 'kz') {
-                document.getElementById('name-input').placeholder = "Аты-жөніңіз";
-                document.getElementById('message-input').placeholder = "Жас жұбайларға тілек";
-            } else {
-                document.getElementById('name-input').placeholder = "Ваше Имя и Фамилия";
-                document.getElementById('message-input').placeholder = "Пожелания для молодых";
-            }
-        }
-
-        // --- Таймер ---
-        const countDownDate = new Date("Jun 13, 2026 17:00:00").getTime();
-        setInterval(function() {
+        // Таймер
+        const targetDate = new Date("Jun 13, 2026 17:00:00").getTime();
+        setInterval(() => {
             const now = new Date().getTime();
-            const distance = countDownDate - now;
-            
-            if (distance < 0) return;
-
-            document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
-            document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
-            document.getElementById("minutes").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+            const diff = targetDate - now;
+            if (diff < 0) return;
+            document.getElementById("days").innerText = Math.floor(diff / (1000*60*60*24)).toString().padStart(2, '0');
+            document.getElementById("hours").innerText = Math.floor((diff % (1000*60*60*24)) / (1000*60*60)).toString().padStart(2, '0');
+            document.getElementById("minutes").innerText = Math.floor((diff % (1000*60*60)) / (1000*60)).toString().padStart(2, '0');
         }, 1000);
 
-        // --- Отправка формы ---
+        // Отправка
         const form = document.getElementById('rsvp-form');
-        const status = document.getElementById('status');
-        const btn = document.getElementById('submit-btn');
-
         form.addEventListener('submit', e => {
             e.preventDefault();
+            if (!attendanceInput.value) { alert("Выберите статус / Статус таңдаңыз"); return; }
+            
+            const btn = document.getElementById('submit-btn');
+            const msg = document.getElementById('status-msg');
             btn.disabled = true;
+            msg.innerText = "...";
             
-            const isKz = document.body.classList.contains('lang-kz');
-            status.innerText = isKz ? "Жіберілуде..." : "Отправка...";
-            
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbwLFYYzUVw92MsAYoL7CDb4jMarnlpfgdl3_wo30Bn0oahAEjJovdMACqiBYZM0BBmZ/exec'; 
-
-            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-                .then(response => {
-                    status.innerText = isKz ? "Рахмет! Жауабыңыз қабылданды." : "Спасибо! Ваш ответ записан.";
-                    status.style.color = "green";
-                    form.reset();
-                    btn.style.display = "none";
-                })
-                .catch(error => {
-                    status.innerText = isKz ? "Қате шықты. Қайта көріңіз." : "Ошибка. Попробуйте еще раз.";
-                    status.style.color = "red";
-                    btn.disabled = false;
-                });
+            const url = 'https://script.google.com/macros/s/AKfycbwLFYYzUVw92MsAYoL7CDb4jMarnlpfgdl3_wo30Bn0oahAEjJovdMACqiBYZM0BBmZ/exec';
+            fetch(url, { method: 'POST', body: new FormData(form) })
+            .then(() => {
+                msg.innerText = "Рахмет! / Спасибо!";
+                form.reset();
+                btn.style.display = 'none';
+            }).catch(() => {
+                msg.innerText = "Error / Қате";
+                btn.disabled = false;
+            });
         });
     </script>
 </body>
