@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Приглашение на свадьбу — Алимжан & Дана</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Pattaya&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
     <style>
         :root { 
             --bg-light: #FCFAF5; 
@@ -18,19 +18,24 @@
         body.lang-ru .kz { display: none !important; }
         body.lang-kz .ru { display: none !important; }
 
-        h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 600; }
+        /* Классический глянцевый шрифт для заголовков и важных дат */
+        h1, h2, h3, .text-romantic, .cal-month, .program-time, .hero-date { 
+            font-family: 'Playfair Display', serif; 
+        }
+        h2 { font-weight: 600; text-transform: uppercase; letter-spacing: 2px; font-size: 1.8em; margin-bottom: 10px;}
         
-        /* Новый шрифт для имен */
+        /* ИМЕННО ИМЕНА - РУКОПИСНЫМ */
         .names { 
-            font-family: 'Cormorant Garamond', serif; 
-            font-style: italic;
+            font-family: 'Pattaya', sans-serif; 
             font-weight: 400;
-            font-size: clamp(3.5em, 12vw, 5.5em); 
-            margin: 15px 0; 
+            font-size: clamp(3.5em, 14vw, 6em); 
+            margin: 10px 0; 
             color: var(--gold); 
-            line-height: 1.1;
+            line-height: 1.2;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
         }
         
+        /* Экран приветствия */
         #welcome-screen { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
             background: var(--deep-green); z-index: 9999; 
@@ -39,70 +44,72 @@
         }
         #welcome-screen.hidden { opacity: 0; visibility: hidden; transition: 1s ease; }
         
-        .welcome-names { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 4em; color: var(--gold); margin-bottom: 30px; }
+        /* Имена на приветственном экране тоже рукописные */
+        .welcome-names { 
+            font-family: 'Pattaya', sans-serif; 
+            font-weight: 400;
+            font-size: 4em; 
+            color: var(--gold); 
+            margin-bottom: 40px; 
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
         
         .entry-btns { display: flex; flex-direction: column; gap: 15px; width: 80%; max-width: 300px; }
         .open-btn { 
             background: transparent; color: var(--gold); border: 1px solid var(--gold); 
-            padding: 15px; font-family: 'Cormorant Garamond', serif; font-size: 1.3em; 
-            border-radius: 5px; cursor: pointer; transition: 0.3s; letter-spacing: 1px;
+            padding: 15px; font-family: 'Playfair Display', serif; font-size: 1.2em; 
+            border-radius: 5px; cursor: pointer; transition: 0.3s; letter-spacing: 1px; text-transform: uppercase;
         }
         .open-btn:hover { background: var(--gold); color: var(--deep-green); }
 
         .music-btn { position: fixed; bottom: 20px; right: 20px; z-index: 1000; background: var(--white); border: 1px solid var(--gold); border-radius: 50%; width: 45px; height: 45px; cursor: pointer; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
 
-        /* Фоны разных секций */
+        /* Секции */
         .section { padding: 80px 20px; }
         
         .hero { 
             min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 20px; 
-            background: linear-gradient(rgba(27, 48, 34, 0.7), rgba(27, 48, 34, 0.7)), url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1000&q=80') center/cover;
+            background: linear-gradient(rgba(27, 48, 34, 0.8), rgba(27, 48, 34, 0.8)), url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1000&q=80') center/cover;
             color: var(--white);
         }
         
         .section-light { background: var(--bg-light); }
         
-        .section-dark { 
-            background: var(--deep-green); 
-            color: var(--gold); 
-        }
-        .section-dark h2 { color: var(--white); }
-        
         .section-image-1 {
-            background: linear-gradient(rgba(252, 250, 245, 0.9), rgba(252, 250, 245, 0.9)), url('https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&w=1000&q=80') center/cover;
-            background-attachment: fixed; /* Эффект параллакса при скролле */
+            background: linear-gradient(rgba(252, 250, 245, 0.93), rgba(252, 250, 245, 0.93)), url('https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&w=1000&q=80') center/cover;
+            background-attachment: fixed;
         }
 
         .section-image-2 {
-            background: linear-gradient(rgba(27, 48, 34, 0.85), rgba(27, 48, 34, 0.85)), url('https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=1000&q=80') center/cover;
+            background: linear-gradient(rgba(27, 48, 34, 0.88), rgba(27, 48, 34, 0.88)), url('https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=1000&q=80') center/cover;
             color: var(--gold);
         }
         .section-image-2 h2 { color: var(--white); }
 
-        .text-romantic { font-family: 'Cormorant Garamond', serif; font-size: 1.6em; line-height: 1.4; }
+        .text-romantic { font-size: 1.6em; line-height: 1.4; font-style: italic; color: var(--gold);}
         .divider { width: 80px; height: 1px; background: var(--gold); margin: 30px auto; }
 
         /* Календарь */
         .calendar { max-width: 320px; margin: 40px auto; background: white; padding: 25px; border-radius: 10px; border: 1px solid var(--gold); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-        .cal-month { font-family: 'Cormorant Garamond', serif; font-size: 1.5em; color: var(--deep-green); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px;}
+        .cal-month { font-size: 1.5em; color: var(--deep-green); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; font-weight: 600;}
         .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; font-size: 0.9em; font-weight: 500; }
         .cal-heart { background: var(--gold); color: white; border-radius: 50%; position: relative; font-weight: bold; }
         .cal-heart::after { content: '❤'; position: absolute; top: -8px; right: -4px; color: #ff4d4d; font-size: 11px; }
 
         /* Программа */
         .program-item { margin-bottom: 30px; display: flex; align-items: center; justify-content: center; gap: 25px; }
-        .program-time { font-family: 'Cormorant Garamond', serif; font-size: 2em; color: var(--gold); font-weight: 600; min-width: 80px; text-align: right; }
+        .program-time { font-size: 2em; color: var(--gold); font-weight: 600; min-width: 80px; text-align: right; }
         .program-desc { text-align: left; font-size: 1em; font-weight: 500;}
 
         /* Таймер */
         .timer-wrap { display: flex; justify-content: center; gap: 15px; margin-top: 30px; }
         .timer-box { background: transparent; border: 1px solid var(--gold); color: var(--gold); padding: 15px; border-radius: 5px; min-width: 70px; }
-        .timer-num { font-size: 1.8em; font-weight: 400; font-family: 'Cormorant Garamond', serif; }
+        .timer-num { font-size: 2.2em; font-weight: 400; font-family: 'Playfair Display', serif; }
         .timer-label { font-size: 0.6em; text-transform: uppercase; color: var(--white); letter-spacing: 1px; margin-top: 5px;}
 
         /* Форма */
         .form-container { background: white; padding: 40px 25px; border-radius: 15px; box-shadow: 0 15px 40px rgba(27, 48, 34, 0.08); max-width: 500px; margin: 0 auto; }
-        input[type="text"] { width: 100%; padding: 15px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; font-size: 1em; text-align: center; background: #fafafa; }
+        input[type="text"] { width: 100%; padding: 15px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; font-size: 1em; text-align: center; background: #fafafa; font-family: inherit;}
         input[type="text"]:focus { outline: none; border-color: var(--gold); }
         
         .status-options { display: flex; flex-direction: column; gap: 10px; }
@@ -115,7 +122,7 @@
         .submit-btn { 
             background: var(--gold); color: white; width: 100%; padding: 18px; 
             border: none; border-radius: 5px; margin-top: 25px; font-weight: 600; 
-            cursor: pointer; text-transform: uppercase; letter-spacing: 2px;
+            cursor: pointer; text-transform: uppercase; letter-spacing: 2px; font-family: inherit;
         }
         
         .btn-2gis { background: var(--deep-green); color: var(--gold); padding: 15px 35px; text-decoration: none; border-radius: 5px; display: inline-block; margin-top: 20px; font-size: 0.9em; letter-spacing: 1px; text-transform: uppercase; font-weight: 500; transition: 0.3s; }
@@ -137,11 +144,11 @@
     <button id="music-btn" class="music-btn" onclick="toggleMusic()">🔊</button>
 
     <div class="hero">
-        <p class="ru" style="letter-spacing: 3px; font-size: 0.9em;">ПРИГЛАШЕНИЕ НА СВАДЬБУ</p>
-        <p class="kz" style="letter-spacing: 3px; font-size: 0.9em;">ҮЙЛЕНУ ТОЙҒА ШАҚЫРУ</p>
+        <p class="ru" style="letter-spacing: 3px; font-size: 1em; text-transform: uppercase;">Приглашение на свадьбу</p>
+        <p class="kz" style="letter-spacing: 3px; font-size: 1em; text-transform: uppercase;">Үйлену тойға шақыру</p>
         <div class="names">Алимжан<br>&<br>Дана</div>
-        <div class="ru" style="letter-spacing: 2px;">13 ИЮНЯ 2026</div>
-        <div class="kz" style="letter-spacing: 2px;">13 МАУСЫМ 2026</div>
+        <div class="ru hero-date" style="letter-spacing: 2px; font-size: 1.3em;">13 ИЮНЯ 2026</div>
+        <div class="kz hero-date" style="letter-spacing: 2px; font-size: 1.3em;">13 МАУСЫМ 2026</div>
     </div>
 
     <div class="section section-light">
@@ -171,8 +178,8 @@
     </div>
 
     <div class="section section-image-1">
-        <h2 class="ru" style="font-size: 2.5em; color: var(--deep-green);">Программа торжества</h2>
-        <h2 class="kz" style="font-size: 2.5em; color: var(--deep-green);">Той бағдарламасы</h2>
+        <h2 class="ru">Программа торжества</h2>
+        <h2 class="kz">Той бағдарламасы</h2>
         <div class="divider"></div>
         
         <div class="program-item">
@@ -196,10 +203,10 @@
     </div>
 
     <div class="section section-light">
-        <h2 class="ru" style="font-size: 2.2em;">Место проведения</h2>
-        <h2 class="kz" style="font-size: 2.2em;">Өтетін орны</h2>
+        <h2 class="ru">Место проведения</h2>
+        <h2 class="kz">Өтетін орны</h2>
         <div class="divider"></div>
-        <p style="font-size: 1.2em; font-family: 'Cormorant Garamond', serif; font-weight: 600;">Банкетный зал «Атамекен»</p>
+        <p style="font-size: 1.3em; font-family: 'Playfair Display', serif; font-weight: 600;">Банкетный зал «Атамекен»</p>
         <p class="ru">г. Алматы, м-н Теректи, ул. Орталык, 36а</p>
         <p class="kz">Алматы қ., Теректі ы/а, Орталық көш., 36а</p>
         
@@ -212,8 +219,8 @@
     </div>
 
     <div class="section section-image-2">
-        <h2 class="ru" style="font-size: 2.2em;">До торжества осталось</h2>
-        <h2 class="kz" style="font-size: 2.2em;">Тойға дейін қалды</h2>
+        <h2 class="ru">До торжества осталось</h2>
+        <h2 class="kz">Тойға дейін қалды</h2>
         <div class="timer-wrap">
             <div class="timer-box"><div class="timer-num" id="days">00</div><div class="timer-label ru">дней</div><div class="timer-label kz">күн</div></div>
             <div class="timer-box"><div class="timer-num" id="hours">00</div><div class="timer-label ru">часов</div><div class="timer-label kz">сағат</div></div>
@@ -222,8 +229,8 @@
     </div>
 
     <div class="section section-light" style="padding-bottom: 100px;">
-        <h2 class="ru" style="font-size: 2.2em;">Подтвердите ваше присутствие</h2>
-        <h2 class="kz" style="font-size: 2.2em;">Тойға келетініңізді растаңыз</h2>
+        <h2 class="ru">Подтвердите ваше присутствие</h2>
+        <h2 class="kz">Тойға келетініңізді растаңыз</h2>
         <div class="divider"></div>
         
         <form id="rsvp-form" class="form-container">
@@ -249,12 +256,12 @@
             <div id="status-msg" style="margin-top: 15px; font-weight: 500;"></div>
         </form>
         
-        <h3 class="ru" style="margin-top: 60px; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 3.5em; color: var(--gold);">Ждем вас!</h3>
-        <h3 class="kz" style="margin-top: 60px; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 3.5em; color: var(--gold);">Сіздерді күтеміз!</h3>
+        <h3 class="ru" style="margin-top: 60px; font-family: 'Pattaya', sans-serif; font-size: 3.5em; color: var(--gold);">Ждем вас!</h3>
+        <h3 class="kz" style="margin-top: 60px; font-family: 'Pattaya', sans-serif; font-size: 3.5em; color: var(--gold);">Сіздерді күтеміз!</h3>
     </div>
 
     <script>
-        // --- Настройка громкости музыки (30%) ---
+        // Громкость 30%
         const music = document.getElementById('bg-music');
         music.volume = 0.3; 
         
@@ -264,7 +271,9 @@
         function openInvitation(lang) {
             document.body.className = `lang-${lang}`;
             document.getElementById('welcome-screen').classList.add('hidden');
-            music.play().then(() => isPlaying = true);
+            // Разрешаем скролл после открытия
+            document.body.style.overflow = 'auto';
+            music.play().then(() => isPlaying = true).catch(() => console.log("Auto-play prevented"));
         }
 
         function setStatus(val, btn) {
@@ -279,7 +288,9 @@
             isPlaying = !isPlaying;
         }
 
-        // Таймер
+        // Запрет скролла на экране приветствия
+        document.body.style.overflow = 'hidden';
+
         const targetDate = new Date("Jun 13, 2026 17:00:00").getTime();
         setInterval(() => {
             const now = new Date().getTime();
@@ -290,7 +301,6 @@
             document.getElementById("minutes").innerText = Math.floor((diff % (1000*60*60)) / (1000*60)).toString().padStart(2, '0');
         }, 1000);
 
-        // Отправка формы
         const form = document.getElementById('rsvp-form');
         form.addEventListener('submit', e => {
             e.preventDefault();
