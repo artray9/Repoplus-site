@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Приглашение на свадьбу — Алимжан & Дана</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Pattaya&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
     <style>
         :root { 
             --bg-light: #FCFAF5; 
@@ -18,21 +18,22 @@
         body.lang-ru .kz { display: none !important; }
         body.lang-kz .ru { display: none !important; }
 
-        /* Классический глянцевый шрифт для заголовков и важных дат */
+        /* Классический глянцевый шрифт для заголовков */
         h1, h2, h3, .text-romantic, .cal-month, .program-time, .hero-date { 
             font-family: 'Playfair Display', serif; 
         }
         h2 { font-weight: 600; text-transform: uppercase; letter-spacing: 2px; font-size: 1.8em; margin-bottom: 10px;}
         
-        /* ИМЕННО ИМЕНА - РУКОПИСНЫМ */
+        /* ИМЕНА - НАСТОЯЩАЯ КАЛЛИГРАФИЯ */
         .names { 
-            font-family: 'Pattaya', sans-serif; 
+            font-family: 'Great Vibes', cursive; 
             font-weight: 400;
-            font-size: clamp(3.5em, 14vw, 6em); 
-            margin: 10px 0; 
+            font-size: clamp(4.5em, 16vw, 7em); 
+            margin: 5px 0; 
             color: var(--gold); 
-            line-height: 1.2;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+            line-height: 1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            padding: 10px 0;
         }
         
         /* Экран приветствия */
@@ -44,14 +45,14 @@
         }
         #welcome-screen.hidden { opacity: 0; visibility: hidden; transition: 1s ease; }
         
-        /* Имена на приветственном экране тоже рукописные */
         .welcome-names { 
-            font-family: 'Pattaya', sans-serif; 
+            font-family: 'Great Vibes', cursive; 
             font-weight: 400;
-            font-size: 4em; 
+            font-size: 5.5em; 
             color: var(--gold); 
             margin-bottom: 40px; 
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            line-height: 1;
         }
         
         .entry-btns { display: flex; flex-direction: column; gap: 15px; width: 80%; max-width: 300px; }
@@ -145,7 +146,7 @@
 
     <div class="hero">
         <p class="ru" style="letter-spacing: 3px; font-size: 1em; text-transform: uppercase;">Приглашение на свадьбу</p>
-        <p class="kz" style="letter-spacing: 3px; font-size: 1em; text-transform: uppercase;">Үйлену тойға шақыру</p>
+        <p class="kz" style="letter-spacing: 3px; font-size: 1em; text-transform: uppercase;">Үйлену тойына шақыру</p>
         <div class="names">Алимжан<br>&<br>Дана</div>
         <div class="ru hero-date" style="letter-spacing: 2px; font-size: 1.3em;">13 ИЮНЯ 2026</div>
         <div class="kz hero-date" style="letter-spacing: 2px; font-size: 1.3em;">13 МАУСЫМ 2026</div>
@@ -159,7 +160,7 @@
         </div>
         <div class="kz">
             <div class="text-romantic">Құрметті ағайын-туыс, бауырлар және достар!</div>
-            <p>Сіздерді өміріміздегі ең ұмытылмас күн – шаңырақ көтеру тойымызға ортақтасуға шақырамыз!</p>
+            <p>Сіздерді өміріміздегі ең ұмытылмас күн – шаңырақ көтеру тойына ортақтасуға шақырамыз!</p>
             <p>Бұл қуанышты сәтті сіздермен бөлісу біз үшін үлкен бақыт. Келуіңіз мерекеміздің ажарын аша түседі.</p>
         </div>
         
@@ -206,7 +207,9 @@
         <h2 class="ru">Место проведения</h2>
         <h2 class="kz">Өтетін орны</h2>
         <div class="divider"></div>
-        <p style="font-size: 1.3em; font-family: 'Playfair Display', serif; font-weight: 600;">Банкетный зал «Атамекен»</p>
+        <p class="ru" style="font-size: 1.3em; font-family: 'Playfair Display', serif; font-weight: 600;">Банкетный зал «Атамекен»</p>
+        <p class="kz" style="font-size: 1.3em; font-family: 'Playfair Display', serif; font-weight: 600;">«Атамекен» банкет залы</p>
+        
         <p class="ru">г. Алматы, м-н Теректи, ул. Орталык, 36а</p>
         <p class="kz">Алматы қ., Теректі ы/а, Орталық көш., 36а</p>
         
@@ -215,7 +218,9 @@
             <span class="kz">Той өтетін орынды оңай табуыңыз үшін картаны дайындадық!</span>
         </p>
         
-        <a href="https://2gis.kz/almaty/search/%D0%B1%D0%B0%D0%BD%D0%BA%D0%B5%D1%82%D0%BD%D1%8B%D0%B9%20%D0%B7%D0%B0%D0%BB/firm/70000001023175064?m=76.789535%2C43.245202%2F18" target="_blank" class="btn-2gis">Открыть в 2ГИС</a>
+        <a href="https://2gis.kz/almaty/search/%D0%B1%D0%B0%D0%BD%D0%BA%D0%B5%D1%82%D0%BD%D1%8B%D0%B9%20%D0%B7%D0%B0%D0%BB/firm/70000001023175064?m=76.789535%2C43.245202%2F18" target="_blank" class="btn-2gis">
+            <span class="ru">Открыть в 2ГИС</span><span class="kz">2ГИС арқылы ашу</span>
+        </a>
     </div>
 
     <div class="section section-image-2">
@@ -234,7 +239,7 @@
         <div class="divider"></div>
         
         <form id="rsvp-form" class="form-container">
-            <input type="text" name="name" id="name-input" placeholder="Ваше Имя / Атыңыз" required>
+            <input type="text" name="name" id="name-input" placeholder="Ваше Имя / Аты-жөніңіз" required>
             
             <div class="status-options">
                 <button type="button" class="status-btn" onclick="setStatus('Да, приду', this)">
@@ -256,8 +261,8 @@
             <div id="status-msg" style="margin-top: 15px; font-weight: 500;"></div>
         </form>
         
-        <h3 class="ru" style="margin-top: 60px; font-family: 'Pattaya', sans-serif; font-size: 3.5em; color: var(--gold);">Ждем вас!</h3>
-        <h3 class="kz" style="margin-top: 60px; font-family: 'Pattaya', sans-serif; font-size: 3.5em; color: var(--gold);">Сіздерді күтеміз!</h3>
+        <h3 class="ru" style="margin-top: 60px; font-family: 'Great Vibes', cursive; font-size: 5em; color: var(--gold); font-weight: 400; padding: 10px 0;">Ждем вас!</h3>
+        <h3 class="kz" style="margin-top: 60px; font-family: 'Great Vibes', cursive; font-size: 5em; color: var(--gold); font-weight: 400; padding: 10px 0;">Асыға күтеміз!</h3>
     </div>
 
     <script>
